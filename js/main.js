@@ -8,7 +8,13 @@ const W = ctx.canvas.width;
 const H = ctx.canvas.height;
 
 function draw() {
-  //
+  ctx.fillStyle = 'green'
+  ctx.fillRect(0, 0, 1000, 1600);
+  ctx.fill()
+  ctx.fillStyle = 'grey'
+  ctx.fillRect(50,0 , 900, 1600)
+  
+  
   // Iteration 1: road drawing
   //
 
