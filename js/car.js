@@ -12,7 +12,8 @@ class Car {
   }
 
   draw() {
-    if (!this.img) return; // if `this.img` is not loaded yet => don't draw
+    if (!this.img) return;
+    // if `this.img` is not loaded yet => don't draw
 
     // TODO
   }
