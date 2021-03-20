@@ -1,4 +1,4 @@
-let car = new Car();
+let car;
 let obstacles;
 let gameover;
 let points;
@@ -8,6 +8,9 @@ const W = ctx.canvas.width;
 const H = ctx.canvas.height;
 
 function draw() {
+  // 
+  // tracer de la route
+  //
   ctx.fillStyle = "green";
   ctx.fillRect(0, 0, 1000, 1600);
   ctx.fill();
@@ -18,10 +21,9 @@ function draw() {
   ctx.fillRect(910, 0, 20, 1600);
   for(let y = 0; y < 1600; y+= 90) {
     ctx.fillRect(485, 20 + y , 10, 50);
-
   }
-
-  // TODO
+  // tracée de la voiture
+  car.draw()
 
   //
   // Iteration #4: obstacles
@@ -64,6 +66,7 @@ function startGame() {
   if (raf) {
     cancelAnimationFrame(raf);
   }
+  car = new Car();
 
   // TODO
 
