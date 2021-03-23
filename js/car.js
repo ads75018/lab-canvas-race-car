@@ -21,10 +21,27 @@ class Car {
     // TODO
   }
 
+  left() {
+    return this.x;
+  }
+  right() {
+    return this.x + this.w;
+  }
+  top() {
+    return this.y;
+  }
+  bottom() {
+    return this.y + this.h;
+  }
+
   moveLeft() {
+    this.x-=6;
+    this.draw();
     // TODO
   }
   moveRight() {
+    this.x+=6;
+    this.draw();
     // TODO
   }
 }

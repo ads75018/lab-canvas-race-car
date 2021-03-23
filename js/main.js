@@ -22,19 +22,56 @@ function draw() {
   for(let y = 0; y < 1600; y+= 90) {
     ctx.fillRect(485, 20 + y , 10, 50);
   }
+  console.log('afficher la voiture');
   // tracée de la voiture
-  car.draw()
-
+  car.draw();
+  // document.addEventListener('keydown', (e) => {
+  //   switch (e.keyCode) {
+  //     case 37: // left arrow
+  //     car.moveLeft();
+  //     break;
+  //   case 39: // right arrow
+  //    car.moveRight();
+  //     break;
+  // }
+  // });
+  // document.addEventListener('keyup', (e) => {
+  //   car.moveLeft = 0;
+  //   car.moveRight= 0;
+  // });
+  document.onkeydown = function (event) {
+    console.log('touche appuyee', event)
+    switch (event.key){
+      case 'ArrowLeft':
+        car.moveLeft();
+        // deplacer en gauche
+        break;
+      case 'ArrowRight':
+        car.moveRight()
+        // deplacer en droite
+        break;
+    }
+  }
   //
   // Iteration #4: obstacles
-  //
-
+  
+  obstacles.draw();
+  for (i = 0; i < myObstacle.length; i++) {
+    myObstacle[i].y += +5;
+    myObstacle[i].draw();
+    
+  }
+  
   // TODO
 
   //
   // Iteration #5: collisions
-  //
-
+  for(let obstacles of myObstacle){
+if (obstacles.hits(car)) {
+  console.log('toucher')
+  return true
+  };
+}
   // TODO
 
   //
@@ -44,41 +81,74 @@ function draw() {
   // TODO
 }
 
+
+
+
 document.onkeydown = function (e) {
   if (!car) return;
 
   // TODO
 };
 
-let raf;
+
+
+
+var raf;
 let frames = 0;
+const myObstacle=[];
+
+
 function animLoop() {
   frames++;
+if(frames %250===0){
+  obstacles=new Obstacle(random(100,600),70,'red',random(50,400),50);
+  myObstacle.push(obstacles);
+}
+
 
   draw();
 
+  if(obstacles.hits(car)===true){
+   
+    img=document.createElement('img')
+    img.src="https://images-na.ssl-images-amazon.com/images/I/81x9V95MoaL._AC_SL1500_.jpg"
+    img.onload=()=>{
+      ctx.clearRect(0,0,W,H);
+      ctx.drawImage(img,0,255,900,720)
+    }
+    return  cancelAnimationFrame(animLoop);
+   }
+
   if (!gameover) {
-    raf = requestAnimationFrame(animLoop);
-  }
+    return requestAnimationFrame(animLoop);
+
 }
+
+}
+
+
+
 
 function startGame() {
   if (raf) {
     cancelAnimationFrame(raf);
   }
+  obstacles=new Obstacle();
   car = new Car();
 
-  // TODO
+ 
 
+  
   animLoop();
 }
 
 document.getElementById("start-button").onclick = function () {
   startGame();
+  
 };
 
 // auto-start
-startGame();
+
 
 
 
